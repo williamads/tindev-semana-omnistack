@@ -1,14 +1,9 @@
 const express = require('express'); // importando express
+const routes = require('./router');
 
 const server = express(); // criando o servidor para receber requisições e retornar respostas
 
-server.get('/', (req, res) => {
-    // console.log(req.query); // ?name=william ao final do link, vai aparecer um json
-
-    // return res.send('Hello World');
-    // return res.send(`Hello ${req.query.name}`); // detalhe na crase
-    return res.json({ message: `Hello ${req.query.name}`});
-})
+server.use(routes);
 
 server.listen(3333); // porta em que o servidor vai escutar
 
