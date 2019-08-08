@@ -1,5 +1,6 @@
 const express = require('express'); // importando express
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose'); // trata consultas no banco com a sintaxe JS
+const cors = require('cors'); // permite acessar a api de qualquer endereço. Libera para o React
 
 const routes = require('./router');
 
@@ -9,6 +10,7 @@ mongoose.connect('mongodb+srv://will:omnistack@cluster0-94mvq.mongodb.net/omnist
     useNewUrlParser: true
 });
 
+server.use(cors());
 server.use(express.json()); // express não usa json por default
 server.use(routes);
 
