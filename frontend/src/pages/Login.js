@@ -14,10 +14,6 @@ export default function Login({ history }){
             username, // username: username (short sintaxe)
         });
 
-        console.log(response);
-
-        console.log(username);
-
         const { _id } = response.data;
 
         history.push(`/dev/${_id}`);
