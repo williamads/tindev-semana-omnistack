@@ -6,7 +6,9 @@ const routes = require('./router');
 
 const app = express(); // criando o servidor para receber requisições e retornar respostas
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+    cors: { origin: '*' }, // a partir do socket.io v3 o CORS precisa ser liberado explicitamente
+});
 
 const connectedUsers = {};
 
@@ -19,9 +21,7 @@ io.on('connection', socket => {
     connectedUsers[user] = socket.id;
 })
 
-mongoose.connect('mongodb+srv://will:omnistack@cluster0-94mvq.mongodb.net/omnistack8?retryWrites=true&w=majority', {
-    useNewUrlParser: true
-});
+mongoose.connect('mongodb+srv://will:omnistack@cluster0-94mvq.mongodb.net/omnistack8?retryWrites=true&w=majority');
 
 app.use((req, res, next) => {
     req.io = io;
